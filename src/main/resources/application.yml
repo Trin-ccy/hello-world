@@ -1,0 +1,76 @@
+#端口号
+server:
+  port: 8081
+#数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mysql?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+#    schema: classpath:db/schema-mysql.sql
+#    data: classpath:db/data-mysql.sql
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: utf-8
+    mode: html5
+    servlet:
+      content-type: text/html
+#data-jpa
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#  jackson:
+#    serialization: true
+#JWT Config
+  #多环境配置切换
+  profiles:
+    active: dev
+
+#日志配置
+logging:
+  level:
+    com.example.demo: debug
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.example.demo.entity
+#Mybatis-Plus配置
+---
+
+server:
+  port: 8082
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mysql?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  profiles: test
+#日志配置
+logging:
+  level:
+    com.example.demo: debug
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.example.demo.entity
+---
+server:
+  port: 8083
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mysql?characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  profiles: prod
+#日志配置
+logging:
+  level:
+    com.example.demo: debug
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.example.demo.entity
